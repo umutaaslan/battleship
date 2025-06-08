@@ -1,96 +1,136 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Staatliches&display=swap');
+/*
+  Josh's Custom CSS Reset (customized by jums)
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+  }
+  html, body {
+    height: 100%;
+    padding: 0;
+    font-family: "Staatliches", sans-serif;
+    font-style: normal;
+    letter-spacing: .06em;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  }
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  input, button, textarea, select {
+    font: inherit;
+  }
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  #root, #__next {
+    isolation: isolate;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 100%;
+  }
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+#landingPage {
+  cursor: crosshair;
+  height: 100%;
+  width: 100%;
+  background-image: url("/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+.battleship-text {
+  color: white;
+  font-size: 6rem;
 }
 
-.card {
-  padding: 2em;
+#name-input{
+  outline: none;
 }
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+#play-button{
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin-top: 24px;
+  padding: 8px 72px;
+  font-size: 1.6rem;
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 4px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#play-button:disabled{
+  transform: scale(1.1);
+  background-color: red;
+}
+
+#play-button:hover{
+  transition: 0.2s;
+  transform: scale(1.1);
+}
+
+#name-input-label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#name-input-label > h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+#preGamePage {
+  width: 100%;
+  height: 100%;
+  background-image: url("/nice-snow.png");
+  background-color: #001fe6;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.10em;
+}
+
+#preGamePage > h1::after {
+  content: "";
+  border-right: 4px solid orange;
+  animation: typeborder 0.75s step-end infinite;
+}
+
+
+@keyframes typeborder {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }

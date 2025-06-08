@@ -4,6 +4,10 @@ export default class Gameboard {
 			Array.from({ length: 10 }, () => null)
 		);
 
+		this.log = [];
+
+		this.placeLog = [];
+
 		// for(let i = 0; i < 10; i++){
 		//     this.grid[i] = [];
 		//     for(let j = 0; j < 10; j++){
@@ -16,12 +20,10 @@ export default class Gameboard {
 		if (this.isShipPlaceable(ship, x, y, axis)) {
 			if (axis === "x") {
 				for (let i = x; i < x + ship.length; i++) {
-					if (Array.isArray(this.grid[i]) && this.grid[i][y] === null) {
-						this.grid[i][y] = ship.name;
-					}
+					this.grid[i][y] = ship;
+					this.placeLog.unshift([i, y]);
 				}
 			}
-
 			return true;
 		}
 
@@ -42,4 +44,24 @@ export default class Gameboard {
 			return false;
 		}
 	}
+
+	receiveAttack(x, y) {
+		const hit = this.grid[x][y];
+		if (hit != null) {
+			hit.hit();
+		}
+		const result = { coord: [x, y], hitShip: hit };
+		this.log.unshift(result);
+		return result;
+	}
+
+	allShipsSunk() {
+        const hitLogs = this.log.filter(log => log.hitShip).map(log => log.coord);
+        
+        for(const pLog of this.placeLog){
+            if(!hitLogs.some(coord => coord[0] === pLog[0] && coord[1] === pLog[1])) return false;
+        }
+        return true;
+    }
 }
+
