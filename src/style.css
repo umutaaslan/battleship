@@ -49,10 +49,16 @@
     font-family: inherit;
     font-size: 100%;
   }
+
+
+
+:root {
+  --ship-width-root: 48px;
+}
 #app {
   height: 100%;
   width: 100%;
-  cursor: crosshair;
+  /* cursor: crosshair; */
 }
 #landingPage {
   cursor: crosshair;
@@ -140,34 +146,87 @@
 
 
 #gamePage {
-   width: 100%;
+  width: 100%;
   height: 100%;
   background-image: url("/nice-snow.png");
-  background-color: #001fe6;
+  background-color: #001181;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+#gamePage > h1 {
+   padding-top: 5%;
+   /* cursor: crosshair; */
+}
+
+.gameMain {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 72px;
 }
 
 .ships {
   border: 2px solid red;
-  height: 100px;
+
 }
 
 .userGameboard {
   border: 2px solid red;
   display: grid;
-  grid-template-columns: repeat(10, 50px);
-  grid-template-rows: repeat(10, 50px);
+  grid-template-columns: repeat(10, 48px);
+  grid-template-rows: repeat(10, 48px);
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 2px;
+  pointer-events: none;
+  cursor: none;
 }
+
 
 .userGameboard > div {
-  border: 1px solid green;
-
+  border: 1px solid white;
+  pointer-events: all;
 }
 
+.userGameboard > div:hover{
+  transition: .15s ease-out;
+  background-color: aqua; 
+}
 
+.ships > img[src $= ".svg"]{
+  filter: invert(0%) sepia(4%) saturate(7500%) hue-rotate(187deg) brightness(100%) contrast(105%);
+  width: 100px; 
+  height: 100px;
+  cursor: pointer;
+}
 
+#ship-carrier{
+  width: calc(var(--ship-width-root) * 5);  
+  
+}
+#ship-battleship{
+  width: calc(var(--ship-width-root) * 4);  
+
+}
+#ship-cruiser{
+  width: calc(var(--ship-width-root) * 3);  
+
+}
+#ship-submarine{
+  width: calc(var(--ship-width-root) * 3);  
+}
+#ship-destroyer{
+  width: calc(var(--ship-width-root) * 2);  
+}
 
 
 @keyframes typeborder {
