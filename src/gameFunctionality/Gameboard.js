@@ -56,12 +56,16 @@ export default class Gameboard {
 	}
 
 	allShipsSunk() {
-        const hitLogs = this.log.filter(log => log.hitShip).map(log => log.coord);
-        
-        for(const pLog of this.placeLog){
-            if(!hitLogs.some(coord => coord[0] === pLog[0] && coord[1] === pLog[1])) return false;
-        }
-        return true;
-    }
-}
+		const hitLogs = this.log
+			.filter((log) => log.hitShip)
+			.map((log) => log.coord);
 
+		for (const pLog of this.placeLog) {
+			if (
+				!hitLogs.some((coord) => coord[0] === pLog[0] && coord[1] === pLog[1])
+			)
+				return false;
+		}
+		return true;
+	}
+}

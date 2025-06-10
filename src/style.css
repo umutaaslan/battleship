@@ -31,6 +31,7 @@
   }
   p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
+    user-select: none;
   }
   #root, #__next {
     isolation: isolate;
@@ -51,6 +52,7 @@
 #app {
   height: 100%;
   width: 100%;
+  cursor: crosshair;
 }
 #landingPage {
   cursor: crosshair;
@@ -69,10 +71,12 @@
 .battleship-text {
   color: white;
   font-size: 6rem;
+  user-select: none;
 }
 
 #name-input{
   outline: none;
+  scale: 1.15;
 }
 #play-button{
   cursor: pointer;
@@ -101,6 +105,7 @@
   align-items: center;
   flex-direction: column;
   gap: 12px;
+  cursor: crosshair;
 }
 
 #name-input-label > h1 {
@@ -123,6 +128,10 @@
   letter-spacing: 0.10em;
 }
 
+
+#preGamePage > h1 {
+  cursor: crosshair;
+}
 #preGamePage > h1::after {
   content: "";
   border-right: 4px solid orange;
@@ -130,7 +139,39 @@
 }
 
 
+#gamePage {
+   width: 100%;
+  height: 100%;
+  background-image: url("/nice-snow.png");
+  background-color: #001fe6;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+}
+
+.ships {
+  border: 2px solid red;
+  height: 100px;
+}
+
+.userGameboard {
+  border: 2px solid red;
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+}
+
+.userGameboard > div {
+  border: 1px solid green;
+
+}
+
+
+
+
+
 @keyframes typeborder {
   from, to { border-color: transparent }
   50% { border-color: orange; }
 }
+
