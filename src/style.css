@@ -175,7 +175,7 @@
   color: lightgreen;
 }
 
-.gameMain {
+.gamePlace {
   display: flex;
   width: 100%;
   height: 100%;
@@ -244,6 +244,64 @@
   width: calc(var(--ship-width-root) * 2);  
 }
 
+.mainGame {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.userGameboardMain {
+  border: 2px solid red;
+  display: grid;
+  grid-template-columns: repeat(10, 48px);
+  grid-template-rows: repeat(10, 48px);
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.userGameboardMain > div, .computerGameboardMain > div  {
+  border: 1px solid white;
+  pointer-events: all;
+  font-size: .5rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.userGameboardMain > div.hit::before, .computerGameboardMain > div.hit::before, .userGameboardMain > div.hit::after,.computerGameboardMain > div.hit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: calc(100%);
+  width: 1px;
+  border: 1px solid red;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.userGameboardMain > div.hit::after, .computerGameboardMain > div.hit::after  {
+  transform: rotate(-45deg);
+}
+
+
+
+.computerGameboardMain {
+  border: 2px solid red;
+  display: grid;
+  grid-template-columns: repeat(10, 48px);
+  grid-template-rows: repeat(10, 48px);
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 2px;
+}
 
 @keyframes typeborder {
   from, to { border-color: transparent }

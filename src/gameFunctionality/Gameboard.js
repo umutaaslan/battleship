@@ -18,10 +18,12 @@ export default class Gameboard {
 
 	placeShip(ship, x, y) {
 		if (this.isShipPlaceable(ship.length, x, y)) {
+			let coords = [];
 			for (let i = x; i < x + ship.length; i++) {
 				this.grid[i][y] = ship;
-				this.placeLog.unshift([i, y]);
+				coords.push([i, y]);
 			}
+			this.placeLog.push({name: ship.name, length: ship.length, coord: coords});
 			return true;
 		}
 		return false;
@@ -40,10 +42,21 @@ export default class Gameboard {
 
 	receiveAttack(x, y) {
 		const hit = this.grid[x][y];
-		if (hit != null) {
+		let didHitShip;
+		if (hit != null && hit !== "hit") {
 			hit.hit();
+			if(hit.hitTimes === hit.length){
+				//ship sunk
+				console.log("ship sunk")
+			}
+			didHitShip = true
 		}
-		const result = { coord: [x, y], hitShip: hit };
+		this.grid[x][y] = "hit";
+		
+		if(hit === "hit") didHitShip = "hit";
+		else if(hit === null) didHitShip = false;
+
+		const result = { coord: [x, y], hitShip: didHitShip };
 		this.log.unshift(result);
 		return result;
 	}

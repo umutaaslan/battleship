@@ -74,3 +74,4 @@ test("allShipsSunk works", () => {
 	gameboard.receiveAttack(7, 0);
 	expect(gameboard.allShipsSunk()).toBe(true);
 });
+

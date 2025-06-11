@@ -2,6 +2,7 @@ import DOM from "./DOM";
 import Gameboard from "./gameFunctionality/Gameboard";
 import Ship from "./gameFunctionality/Ship";
 import shipsInfo from "./shipsInfo";
+import initializeGame from "./initializeGame";
 
 export default function placeShipsPage() {
 	const userGameboard = new Gameboard();
@@ -60,10 +61,9 @@ export default function placeShipsPage() {
 						DOM.placeShipsText.classList.add("allowed-text");
 					}
 				});
-			}
-			else {
+			} else {
 				if (!DOM.placeShipsText.classList.contains("not-allowed-text")) {
-						DOM.placeShipsText.classList.add("not-allowed-text");
+					DOM.placeShipsText.classList.add("not-allowed-text");
 				}
 			}
 		});
@@ -101,10 +101,10 @@ export default function placeShipsPage() {
 					div.classList.remove("allowed");
 				}
 				if (DOM.placeShipsText.classList.contains("allowed-text")) {
-						DOM.placeShipsText.classList.remove("allowed-text");
+					DOM.placeShipsText.classList.remove("allowed-text");
 				}
 				if (DOM.placeShipsText.classList.contains("not-allowed-text")) {
-						DOM.placeShipsText.classList.remove("not-allowed-text");
+					DOM.placeShipsText.classList.remove("not-allowed-text");
 				}
 			});
 
@@ -124,6 +124,11 @@ export default function placeShipsPage() {
 				for (let i = 1; i < divs.length; i++) {
 					divs[i].remove();
 				}
+			}
+
+			if (userGameboard.placeLog.length === 5) {
+				DOM.placeShipsText.innerText = "START!";
+				setTimeout(() => initializeGame(userGameboard), 2 * 1000);
 			}
 		});
 	});

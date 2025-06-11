@@ -14,7 +14,7 @@ export default async function preGame() {
 							type(`Let's give 'em the hell!`, typeSound).then(() => {
 								setTimeout(() => {
 									DOM.preGamePage.style.display = "none";
-									DOM.gamePage.style.display = "block";
+									DOM.gamePage.style.display = "flex";
                                     resolve();
 								}, 2 * 1000);
 							});
