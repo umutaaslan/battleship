@@ -222,7 +222,6 @@
 
 #ship-carrier{
   width: calc(var(--ship-width-root) * 5);  
-  
 }
 #ship-battleship{
   width: calc(var(--ship-width-root) * 4);  

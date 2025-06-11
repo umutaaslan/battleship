@@ -53,8 +53,10 @@ export default function placeShipsPage() {
 			if (userGameboard.isShipPlaceable(length, x, y)) {
 				const divs = getPlaceableDivs(length, x, y);
 				divs.forEach((div) => {
-					if (!div.classList.contains("allowed")) {
-						div.classList.add("allowed");
+					if (!div.querySelector("img")) {
+						if (!div.classList.contains("allowed")) {
+							div.classList.add("allowed");
+						}
 					}
 				});
 			}
@@ -83,24 +85,30 @@ export default function placeShipsPage() {
 			const x = Number(e.target.getAttribute("data-position-x"));
 			const y = Number(e.target.getAttribute("data-position-y"));
 			const length = shipsInfo[id].length;
-			
+
 			const divs = getPlaceableDivs(length, x, y);
 			divs.forEach((div) => {
-				if (div.classList.contains("allowed")) div.classList.remove("allowed");
+				if (div && div.classList.contains("allowed"))
+					div.classList.remove("allowed");
 			});
 
 			if (userGameboard.isShipPlaceable(length, x, y)) {
+				const ship = new Ship(shipsInfo[id].name, length);
+				userGameboard.placeShip(ship, x, y);
 				const w = 48 * length;
-				divs[0].style = `grid-column: ${x+1} / span ${length}; grid-row: ${y+1} / ${y+2}`
+				divs[0].style = `grid-column: ${x + 1} / span ${length}; grid-row: ${
+					y + 1
+				} / ${y + 2}`;
 				const shipEl = document.getElementById(id);
 				shipEl.style.height = "44px";
 				shipEl.style.width = `${w}px`;
+				shipEl.style.pointerEvents = "none";
 				divs[0].appendChild(shipEl);
-				for(let i = 1; i < divs.length; i++){
+
+				for (let i = 1; i < divs.length; i++) {
 					divs[i].remove();
 				}
 			}
-
 		});
 	});
 }
