@@ -53,10 +53,18 @@ export default function placeShipsPage() {
 			if (userGameboard.isShipPlaceable(length, x, y)) {
 				const divs = getPlaceableDivs(length, x, y);
 				divs.forEach((div) => {
-						if (!div.classList.contains("allowed")) {
-							div.classList.add("allowed");
-						}
+					if (!div.classList.contains("allowed")) {
+						div.classList.add("allowed");
+					}
+					if (!DOM.placeShipsText.classList.contains("allowed-text")) {
+						DOM.placeShipsText.classList.add("allowed-text");
+					}
 				});
+			}
+			else {
+				if (!DOM.placeShipsText.classList.contains("not-allowed-text")) {
+						DOM.placeShipsText.classList.add("not-allowed-text");
+				}
 			}
 		});
 
@@ -70,6 +78,9 @@ export default function placeShipsPage() {
 				divs.forEach((div) => {
 					if (div && div.classList.contains("allowed")) {
 						div.classList.remove("allowed");
+					}
+					if (DOM.placeShipsText.classList.contains("allowed-text")) {
+						DOM.placeShipsText.classList.remove("allowed-text");
 					}
 				});
 			});
@@ -86,8 +97,15 @@ export default function placeShipsPage() {
 
 			const divs = getPlaceableDivs(length, x, y);
 			divs.forEach((div) => {
-				if (div && div.classList.contains("allowed"))
+				if (div && div.classList.contains("allowed")) {
 					div.classList.remove("allowed");
+				}
+				if (DOM.placeShipsText.classList.contains("allowed-text")) {
+						DOM.placeShipsText.classList.remove("allowed-text");
+				}
+				if (DOM.placeShipsText.classList.contains("not-allowed-text")) {
+						DOM.placeShipsText.classList.remove("not-allowed-text");
+				}
 			});
 
 			if (userGameboard.isShipPlaceable(length, x, y)) {

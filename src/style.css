@@ -160,9 +160,19 @@
   padding: 24px;
 }
 
-#gamePage > h1 {
+#gamePage > h1#placeYourShipsText {
    padding-top: 5%;
    /* cursor: crosshair; */
+}
+
+#gamePage > h1#placeYourShipsText.not-allowed-text {
+  transition: .1s;
+  color: rgb(255, 1, 1);
+}
+
+#gamePage > h1#placeYourShipsText.allowed-text {
+  transition: .15s;
+  color: lightgreen;
 }
 
 .gameMain {
@@ -206,11 +216,6 @@
 .userGameboard > div.allowed {  
   transition: 0.1s;
   background-color: lightgreen; 
-}
-
-.userGameboard > div.not-allowed {
-  transition: 0.1s;
-  background-color: red; 
 }
 
 .ships > img[src $= ".svg"]{
