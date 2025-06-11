@@ -16,32 +16,25 @@ export default class Gameboard {
 		// }
 	}
 
-	placeShip(ship, x, y, axis) {
-		if (this.isShipPlaceable(ship, x, y, axis)) {
-			if (axis === "x") {
-				for (let i = x; i < x + ship.length; i++) {
-					this.grid[i][y] = ship;
-					this.placeLog.unshift([i, y]);
-				}
+	placeShip(ship, x, y) {
+		if (this.isShipPlaceable(ship.length, x, y)) {
+			for (let i = x; i < x + ship.length; i++) {
+				this.grid[i][y] = ship;
+				this.placeLog.unshift([i, y]);
 			}
 			return true;
 		}
-
 		return false;
 	}
 
-	isShipPlaceable(ship, x, y, axis) {
+	isShipPlaceable(length, x, y) {
 		if (x >= 0 && x < 10 && y >= 0 && y < 10) {
-			if (axis === "x") {
-				for (let i = x; i < x + ship.length; i++) {
-					if (!Array.isArray(this.grid[i]) || this.grid[i][y] !== null) {
-						return false;
-					}
+			for (let i = x; i < x + length; i++) {
+				if (!Array.isArray(this.grid[i]) || this.grid[i][y] !== null) {
+					return false;
 				}
-				return true;
 			}
-		} else {
-			return false;
+			return true;
 		}
 	}
 

@@ -1,5 +1,7 @@
 import DOM from "./DOM";
 import Gameboard from "./gameFunctionality/Gameboard";
+import Ship from "./gameFunctionality/Ship";
+import shipsInfo from "./shipsInfo";
 
 export default function placeShipsPage() {
 	const userGameboard = new Gameboard();
@@ -13,9 +15,13 @@ export default function placeShipsPage() {
 		});
 	});
 
+    // guess you shouldn't do this, it is against the dataTransfer rules. Search a better way to do it.
+    let currentShipId;
+
 	function dragstartHandler(e) {
 		e.dataTransfer.setData("text/plain", e.target.id);
         e.dataTransfer.dropEffect = "move";
+        currentShipId = e.target.id;
 	}
 
 	window.addEventListener("DOMContentLoaded", () => {
@@ -27,11 +33,17 @@ export default function placeShipsPage() {
         //     e.preventDefault();
         // });
 
+
 		DOM.userGameboard.addEventListener("dragover", (e) => {
+			const id = e.dataTransfer;
+			e.preventDefault();
+			console.log(id);
             const x = Number(e.target.getAttribute("data-position-x"));
             const y = Number(e.target.getAttribute("data-position-y"));
-			e.preventDefault();
-            console.log(userGameboard)
+
+            const shipInfo = shipsInfo[id];
+            const ship = new Ship();
+            // console.log(userGameboard.isShipPlaceable(x, y));
 		});
 
 		DOM.userGameboard.addEventListener("drop", (e) => {
