@@ -197,9 +197,20 @@
   pointer-events: all;
 }
 
+
 .userGameboard > div:hover{
   transition: .15s ease-out;
   background-color: aqua; 
+}
+
+.userGameboard > div.allowed {  
+  transition: 0.1s;
+  background-color: lightgreen; 
+}
+
+.userGameboard > div.not-allowed {
+  transition: 0.1s;
+  background-color: red; 
 }
 
 .ships > img[src $= ".svg"]{
@@ -222,7 +233,8 @@
 
 }
 #ship-submarine{
-  width: calc(var(--ship-width-root) * 3);  
+  width: calc(var(--ship-width-root) * 3);
+  padding-top: 8px;
 }
 #ship-destroyer{
   width: calc(var(--ship-width-root) * 2);  
