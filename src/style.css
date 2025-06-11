@@ -59,6 +59,8 @@
   height: 100%;
   width: 100%;
   /* cursor: crosshair; */
+    overflow: clip;
+
 }
 #landingPage {
   cursor: crosshair;
@@ -260,15 +262,15 @@
   grid-auto-flow: column;
   justify-content: center;
   gap: 2px;
-  pointer-events: none;
 }
 
 .userGameboardMain > div, .computerGameboardMain > div  {
   border: 1px solid white;
-  pointer-events: all;
   font-size: .5rem;
   position: relative;
-  isolation: isolate;
+}
+.computerGameboardMain > div {
+  cursor: crosshair;
 }
 
 .userGameboardMain > div.hit::before, .computerGameboardMain > div.hit::before, .userGameboardMain > div.hit::after,.computerGameboardMain > div.hit::after {
@@ -282,9 +284,18 @@
   height: calc(100%);
   width: 1px;
   border: 1px solid red;
-  transform: rotate(45deg);
   border-radius: 2px;
   opacity: 0.8;
+  animation: landToPage .8s ease-in;
+  z-index: 1;
+}
+
+.userGameboardMain > div.hit.hit-water::before, .computerGameboardMain > div.hit.hit-water::before, .userGameboardMain > div.hit.hit-water::after,.computerGameboardMain > div.hit.hit-water::after{
+  border-color: white;
+}
+
+.userGameboardMain > div.hit::before, .computerGameboardMain > div.hit::before {
+  transform: rotate(45deg);
 }
 
 .userGameboardMain > div.hit::after, .computerGameboardMain > div.hit::after  {
@@ -306,5 +317,31 @@
 @keyframes typeborder {
   from, to { border-color: transparent }
   50% { border-color: orange; }
+}
+
+@keyframes landToPage {
+  0% {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: black;
+    border-color: black;
+    transform: scale(2);
+  }
+  98%{
+    background-color: black;
+    border-color: black;
+  }
+  99% {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: red;
+    transform: scale(0.2);
+  }
+
+  100% {
+    transform: scale(1.0);
+  }
 }
 

@@ -23,7 +23,7 @@ export default function placeShipsPage() {
 		for (let i = x; i < x + length; i++) {
 			divs.push(
 				document.querySelector(
-					`div[data-position-x='${i}'][data-position-y='${y}']`
+					`#gamePage div[data-position-x='${i}'][data-position-y='${y}']`
 				)
 			);
 		}
