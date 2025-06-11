@@ -53,11 +53,9 @@ export default function placeShipsPage() {
 			if (userGameboard.isShipPlaceable(length, x, y)) {
 				const divs = getPlaceableDivs(length, x, y);
 				divs.forEach((div) => {
-					if (!div.querySelector("img")) {
 						if (!div.classList.contains("allowed")) {
 							div.classList.add("allowed");
 						}
-					}
 				});
 			}
 		});
