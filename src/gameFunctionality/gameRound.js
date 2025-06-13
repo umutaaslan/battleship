@@ -10,25 +10,31 @@ export default function (player1, player2, x, y) {
 		div = document.querySelector(
 			`.mainGame .computerGameboardMain div[data-position-x='${x}'][data-position-y='${y}']`
 		);
+		if (player2.gameboard.allShipsSunk()) {
+			return true;
+		}
 		player1.turn = false;
 		player2.turn = true;
 	} else if (player2.turn) {
-		let compX = Math.floor(Math.random() * 10);
-		let compY = Math.floor(Math.random() * 10);
+		let isDifferentCoord = true;
+		let compX;
+		let compY;
+		do {
+			compX = Math.floor(Math.random() * 10);
+			compY = Math.floor(Math.random() * 10);
+			isDifferentCoord = player1.gameboard.log.every(
+				(item) => item.coord[0] !== compX || item.coord[1] !== compY
+			);
+		} while (!isDifferentCoord);
 		attack = player1.gameboard.receiveAttack(compX, compY);
-		if (attack.hitShip === "hit") {
-			while (attack.hitShip === "hit") {
-				compX = Math.floor(Math.random() * 10);
-				compY = Math.floor(Math.random() * 10);
-				attack = player1.gameboard.receiveAttack(
-					Math.floor(Math.random() * 10),
-					Math.floor(Math.random() * 10)
-				);
-			}
-		}
+
 		div = document.querySelector(
 			`.mainGame .userGameboardMain div[data-position-x='${compX}'][data-position-y='${compY}']`
 		);
+
+		if (player1.gameboard.allShipsSunk()) {
+			return true;
+		}
 		player1.turn = true;
 		player2.turn = false;
 	}
@@ -39,6 +45,5 @@ export default function (player1, player2, x, y) {
 	} else if (attack.hitShip) {
 		div.classList.add("hit");
 	}
-    div.style.pointerEvents = "none";
-
+	div.style.pointerEvents = "none";
 }

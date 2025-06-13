@@ -7,11 +7,14 @@ function domFunc() {
 	const userNameInput = document.querySelector("#name-input");
 	const userGameboard = document.querySelector(".userGameboard");
 	const userGameboardMain = document.querySelector(".userGameboardMain");
-	const computerGameboardMain = document.querySelector(".computerGameboardMain");
+	const computerGameboardMain = document.querySelector(
+		".computerGameboardMain"
+	);
 	const ships = document.querySelectorAll(".ships > img[src$='.svg']");
 	const placeShipsText = document.querySelector("h1#placeYourShipsText");
 	const gamePlace = document.querySelector(".gamePlace");
 	const mainGame = document.querySelector(".mainGame");
+	const wonPage = document.querySelector(".wonPage");
 
 	return {
 		playButton,
@@ -27,6 +30,7 @@ function domFunc() {
 		placeShipsText,
 		gamePlace,
 		mainGame,
+		wonPage,
 	};
 }
 

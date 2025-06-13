@@ -23,7 +23,11 @@ export default class Gameboard {
 				this.grid[i][y] = ship;
 				coords.push([i, y]);
 			}
-			this.placeLog.push({name: ship.name, length: ship.length, coord: coords});
+			this.placeLog.push({
+				name: ship.name,
+				length: ship.length,
+				coord: coords,
+			});
 			return true;
 		}
 		return false;
@@ -45,32 +49,39 @@ export default class Gameboard {
 		let didHitShip;
 		if (hit != null && hit !== "hit") {
 			hit.hit();
-			if(hit.hitTimes === hit.length){
-				//ship sunk
-				console.log("ship sunk")
+			if (hit.hitTimes === hit.length) {
+				// SHIP SUNK AND THE HIT HERE IS THE SHIP
+				// console.log(hit)
 			}
-			didHitShip = true
+			didHitShip = true;
 		}
 		this.grid[x][y] = "hit";
-		
-		if(hit === "hit") didHitShip = "hit";
-		else if(hit === null) didHitShip = false;
 
-		const result = { coord: [x, y], hitShip: didHitShip };
+		if (hit === "hit") didHitShip = "hit";
+		else if (hit === null) didHitShip = false;
+
+		const result = { coord: [Number(x), Number(y)], hitShip: didHitShip };
 		this.log.unshift(result);
 		return result;
 	}
 
 	allShipsSunk() {
-		const hitLogs = this.log
-			.filter((log) => log.hitShip)
-			.map((log) => log.coord);
+		const hitLogsFiltered = this.log.filter((log) => {
+			return log.hitShip;
+		});
+		const hitLogs = hitLogsFiltered.map((log) => {
+			return log.coord;
+		});
 
-		for (const pLog of this.placeLog) {
-			if (
-				!hitLogs.some((coord) => coord[0] === pLog[0] && coord[1] === pLog[1])
-			)
-				return false;
+
+		for (const placedShip of this.placeLog) {
+			for (const pLog of placedShip.coord) {
+				if (
+					!hitLogs.some((coord) => coord[0] === pLog[0] && coord[1] === pLog[1])
+				) {
+					return false;
+				}
+			}
 		}
 		return true;
 	}

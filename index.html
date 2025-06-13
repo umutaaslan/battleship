@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="app">
-      <div id="landingPage" style="display: none;">
+      <div id="landingPage">
         <div class="battleship-text">BATTLESHIP</div>
         <label for="name-input" id="name-input-label">
           <h1>Introduce yourself, sir.</h1>
@@ -19,7 +19,7 @@
       <div id="preGamePage" style="display: none;">
         <h1></h1>
       </div>
-      <div id="gamePage">
+      <div id="gamePage" style="display: none;">
         <h1 id="placeYourShipsText">Place your ships!</h1>
         <main class="gamePlace">
           <div class="userGameboard"></div>
@@ -38,7 +38,7 @@
         </main>
       </div>
 
-
+      <div class="wonPage" style="display: none;"><h1></h1></div>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

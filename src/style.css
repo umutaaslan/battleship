@@ -314,6 +314,16 @@
   gap: 2px;
 }
 
+.wonPage {
+  height: 100%;
+  width: 100%;
+  background-image: url("/nice-snow.png");
+  background-color: #001fe6;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+
 @keyframes typeborder {
   from, to { border-color: transparent }
   50% { border-color: orange; }

@@ -56,22 +56,28 @@ test("receive attack", () => {
 
 	expect(ship1.hitTimes).toBe(1);
 	expect(gameboard.log).toEqual([
-		{ coord: [5, 0], hitShip: ship1 },
-		{ coord: [1, 1], hitShip: null },
+		{ coord: [5, 0], hitShip: true },
+		{ coord: [1, 1], hitShip: false },
 	]);
 });
 
 test("allShipsSunk works", () => {
 	const gameboard = new Gameboard();
 	const ship1 = new Ship("ship1", 3);
+	const ship2 = new Ship("ship1", 2);
 
 	gameboard.placeShip(ship1, 5, 0);
+	gameboard.placeShip(ship2, 0, 0);
 
 	gameboard.receiveAttack(1, 1);
 	gameboard.receiveAttack(5, 0);
 	gameboard.receiveAttack(6, 0);
 	expect(gameboard.allShipsSunk()).toBe(false);
 	gameboard.receiveAttack(7, 0);
+	gameboard.receiveAttack(0, 0);
+	gameboard.receiveAttack(1, 0);
 	expect(gameboard.allShipsSunk()).toBe(true);
+
+
 });
 

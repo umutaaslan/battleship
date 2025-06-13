@@ -1,10 +1,12 @@
 import DOM from "./DOM.js";
 import { userName } from "./main.js";
+import fadeIn from "./fadeIn.js";
 
 export default async function preGame() {
 	const typeSound = new Audio("/typewriter-sound.mp3");
 
-	fadeIn();
+	fadeIn(DOM.landingPage, DOM.preGamePage);
+	
 	return new Promise((resolve) => {
 		type(`All right, admiral ${userName}.`, typeSound).then(() =>
 			setTimeout(
@@ -24,28 +26,6 @@ export default async function preGame() {
 			)
 		);
 	});
-
-	function fadeIn() {
-		DOM.landingPage.style = "display: none";
-		DOM.preGamePage.style = "opacity: 0";
-		DOM.preGamePage.style = "display: block";
-
-		let timeStart;
-
-		function step(timestamp) {
-			if (timeStart === undefined) {
-				timeStart = timestamp;
-			}
-			const elapsed = timestamp - timeStart;
-
-			const opacity = Math.min(elapsed * 0.002, 1);
-			DOM.preGamePage.style = `opacity: ${opacity};`;
-
-			if (opacity < 1) window.requestAnimationFrame(step);
-		}
-
-		window.requestAnimationFrame(step);
-	}
 
 	function type(text, audio) {
 		return new Promise((resolve) => {
