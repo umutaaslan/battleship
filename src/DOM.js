@@ -15,6 +15,7 @@ function domFunc() {
 	const gamePlace = document.querySelector(".gamePlace");
 	const mainGame = document.querySelector(".mainGame");
 	const wonPage = document.querySelector(".wonPage");
+	const infoText = document.querySelector(".infoText");
 
 	return {
 		playButton,
@@ -31,6 +32,7 @@ function domFunc() {
 		gamePlace,
 		mainGame,
 		wonPage,
+		infoText
 	};
 }
 

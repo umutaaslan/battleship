@@ -49,10 +49,6 @@ export default class Gameboard {
 		let didHitShip;
 		if (hit != null && hit !== "hit") {
 			hit.hit();
-			if (hit.hitTimes === hit.length) {
-				// SHIP SUNK AND THE HIT HERE IS THE SHIP
-				// console.log(hit)
-			}
 			didHitShip = true;
 		}
 		this.grid[x][y] = "hit";
@@ -60,7 +56,7 @@ export default class Gameboard {
 		if (hit === "hit") didHitShip = "hit";
 		else if (hit === null) didHitShip = false;
 
-		const result = { coord: [Number(x), Number(y)], hitShip: didHitShip };
+		const result = { coord: [Number(x), Number(y)], hitShip: didHitShip, ship: hit };
 		this.log.unshift(result);
 		return result;
 	}

@@ -56,8 +56,8 @@ test("receive attack", () => {
 
 	expect(ship1.hitTimes).toBe(1);
 	expect(gameboard.log).toEqual([
-		{ coord: [5, 0], hitShip: true },
-		{ coord: [1, 1], hitShip: false },
+		{ coord: [5, 0], hitShip: true, ship: ship1 },
+		{ coord: [1, 1], hitShip: false, ship: null},
 	]);
 });
 

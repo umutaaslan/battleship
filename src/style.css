@@ -187,12 +187,15 @@
 }
 
 .ships {
-  border: 2px solid red;
-
+  background-color: hsla(0, 0%, 70%, 0.4);
+  width: 240px;
+  height: 500px;
+  border-radius: 4px;
+  padding: 12px 24px;
 }
 
 .userGameboard {
-  border: 2px solid red;
+  border: 1px solid white;
   display: grid;
   grid-template-columns: repeat(10, 48px);
   grid-template-rows: repeat(10, 48px);
@@ -250,12 +253,21 @@
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
+}
+.infoText {
+  text-align: center;
+}
+.gameLayout {
+  display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .userGameboardMain {
-  border: 2px solid red;
+  border: 1px solid white;
   display: grid;
   grid-template-columns: repeat(10, 48px);
   grid-template-rows: repeat(10, 48px);
@@ -305,7 +317,7 @@
 
 
 .computerGameboardMain {
-  border: 2px solid red;
+  border: 1px solid white;
   display: grid;
   grid-template-columns: repeat(10, 48px);
   grid-template-rows: repeat(10, 48px);
@@ -321,6 +333,11 @@
   background-color: #001fe6;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
 

@@ -6,6 +6,7 @@ import gameRound from "./gameFunctionality/gameRound";
 import wonPage from "./wonPage";
 
 export default function initializeGame(userGameboard) {
+	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	DOM.placeShipsText.style.display = "none";
 	DOM.gamePlace.style.display = "none";
 	DOM.mainGame.style.display = "flex";
@@ -14,13 +15,14 @@ export default function initializeGame(userGameboard) {
 
 	placeShipsRandomly(computerGameboard);
 
-	const user = new Player(userGameboard);
+	const user = new Player(userGameboard, "user");
 
-	const computer = new Player(computerGameboard);
+	const computer = new Player(computerGameboard, "computer");
 
-	
+	async function handleShot(e, gameboard) {
+		DOM.computerGameboardMain.style.pointerEvents = "none";
+		DOM.computerGameboardMain.style.cursor = "default";
 
-	function handleShot(e, gameboard) {
 		const x = e.target.getAttribute("data-position-x");
 		const y = e.target.getAttribute("data-position-y");
 
@@ -29,14 +31,23 @@ export default function initializeGame(userGameboard) {
 		//user's hit
 		const usersRound = gameRound(user, computer, x, y);
 
-		//computer's hit (time out here)
+		if (usersRound) {
+			await wait(2000);
+			wonPage("user");
+		}
+
+		//computer's hit
+
+		await wait((Math.floor(Math.random() * 10) / 10) * 1000);
 		const computersRound = gameRound(user, computer, x, y);
 
-		if (usersRound) {
-			wonPage("user");
-		} else if (computersRound) {
+		if (computersRound && !usersRound) {
+			await wait(2000);
 			wonPage("computer");
 		}
+
+		DOM.computerGameboardMain.style.pointerEvents = "all";
+		DOM.computerGameboardMain.style.cursor = "crosshair";
 	}
 
 	userGameboard.grid.forEach((x, xIndex) => {
@@ -46,7 +57,7 @@ export default function initializeGame(userGameboard) {
 			cell.setAttribute("data-position-y", yIndex);
 			if (el) {
 				//there is a ship
-				cell.innerText = el.name;
+				cell.style.backgroundColor = "rgb(77, 201, 77)";
 			}
 			DOM.userGameboardMain.appendChild(cell);
 		});
@@ -57,10 +68,7 @@ export default function initializeGame(userGameboard) {
 			const cell = document.createElement("div");
 			cell.setAttribute("data-position-x", xIndex);
 			cell.setAttribute("data-position-y", yIndex);
-			if (el) {
-				//there is a ship
-				cell.innerText = el.name;
-			}
+
 			cell.addEventListener("click", (e) => handleShot(e, computerGameboard));
 			DOM.computerGameboardMain.appendChild(cell);
 		});
