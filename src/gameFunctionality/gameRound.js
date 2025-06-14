@@ -44,7 +44,7 @@ export default function (player1, player2, x, y) {
 		//This logic might be more efficient if computer checks adjacent cells to see if they are hit before.
 
 		if (player1.gameboard.log.length > 0 && player1.gameboard.log[0].hitShip) {
-			console.log("inside");
+
 			let num = Math.floor(Math.random() * 2) + 1;
 			let estimatedX = Math.min(9, player1.gameboard.log[0].coord[0] + num);
 			let isDC = (isDifferentCoord = player1.gameboard.log.every(
@@ -56,7 +56,6 @@ export default function (player1, player2, x, y) {
 			if (isDC) {
 				compX = estimatedX;
 				compY = player1.gameboard.log[0].coord[1];
-				console.log(estimatedX);
 			} else {
 				num = Math.floor(Math.random() * 2) + 1;
 				estimatedX = Math.min(9, player1.gameboard.log[0].coord[0] - num);
@@ -68,7 +67,7 @@ export default function (player1, player2, x, y) {
 				if (isDC) {
 					compX = estimatedX;
 					compY = player1.gameboard.log[0].coord[1];
-					console.log(estimatedX);
+
 				}
 			}
 		}
